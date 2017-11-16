@@ -1,0 +1,256 @@
+#login {
+		font: bold 1em Verdana;
+		position: absolute;
+		right: 5%;
+		top: 38%;
+		color: white;
+		text-shadow: 5px 5px 10px black;		
+}
+		
+#sub {
+		float: right;
+		background-color: rgba(0,0,0,0.01);
+		border: 1px solid black;
+		box-shadow: 3px 4px 10px black;
+}
+#reg {
+		float: left;
+		background-color: rgba(0,0,0,0.01);
+		border: 1px solid black;
+		box-shadow: 3px 4px 10px black;
+}
+div.loginErrors {
+		font: .7em Verdana; 
+		color: #ccccee; 
+		position: absolute; 
+		right: 5%; 
+		top: 55%; 
+		text-shadow: 5px 5px 12px black;
+	
+}
+div.change_pass_errors {
+		font: .7em Verdana; 
+		color: #ccccee; 
+		position: absolute; 
+		right: 5%; 
+		top: 58%; 
+		text-shadow: 5px 5px 12px black;
+	
+} 
+???? {
+		font: .7em Verdana; 
+		color: #ccccee; 
+		position: absolute; 
+		right: 5%; 
+		top: 55%; 
+		text-shadow: 5px 5px 12px black;
+	
+}
+
+div.registerErrors {
+		font: .7em Verdana; 
+		color: #ccccee; 
+		position: absolute; 
+		left: 3%; 
+		top: 62%; 
+		text-shadow: 5px 5px 12px black;
+	
+}
+div.activateErrors ul{
+	list-style-type: none;
+}
+div.activateErrors {
+		font: .6em Verdana; 
+		color: #ccccee; 
+		position: absolute; 
+		left: 41%; 
+		top: 42%; 
+		text-shadow: 5px 5px 12px black;
+	
+}
+div.registerSuccess {
+		font: .67em Verdana; 
+		color: #ccccee;
+		position: absolute; 
+		left: 42.9%; 
+		top: 42%; 
+		text-shadow: 5px 5px 12px black;
+}
+div.registerSuccess a {
+		text-decoration: none;
+		color: #ccccee;
+		position: absolute; 
+		left: 32%; 
+		top: 100%; 
+		text-shadow: 5px 5px 12px black;
+}
+div.registerSuccess a:hover {
+	
+    stroke-width: 5.3px;
+    stroke-color: #FFFFFF;
+    fill-color: #FFFFFF;
+    text-shadow: 0px 0px .3em #ccccee, 0px 0px .8em #ccccee,0px 0px .3em #ccccee;
+    transition: width 1s; /*Safari & Chrome*/
+
+}
+#login ul, #changePass ul {
+	list-style-type: none;
+}
+#register ul {
+	list-style-type: none;
+}
+
+#login, #register, #changePass ul li {
+	clear: both;
+}
+label {
+	
+	float: left;
+	width: 8.5em;
+	text-align: right;
+	margin-right: 1em;
+	margin-left: -3em;
+}
+label.login_display {
+	
+	float: left;
+	width: 7em;
+	text-align: right;
+	margin-right: 1em;
+	margin-left: -3em;
+}
+label.change_pass {
+	
+	float: left;
+	width: 10em;
+	text-align: right;
+	margin-right: 1em;
+	margin-left: -3em;
+}
+label.change_user_info {
+	
+	float: left;
+	width: 8em;
+	text-align: right;
+	margin-right: 1em;
+	margin-left: -3em;
+}
+input.infoInput {
+	width: 15em;
+	border: 1px solid #000000;
+	
+}
+#register {
+		font: bold 1em Verdana;
+		position: absolute;
+		left: 4%;
+		top: 30%;
+		color: white;
+		text-shadow: 5px 5px 10px black;	
+}
+#res {
+		float: right;
+		background-color: rgba(0,0,0,0.01);
+		border: 1px solid black;
+		box-shadow: 3px 4px 10px black;
+}
+div.userCount {
+		font: .85em Verdana; 
+		color: #ccccee;
+		position: absolute; 
+		right: .3%; 
+		top: 1%; 
+		text-shadow: 5px 5px 12px black;
+}
+#changePass {
+		font: bold 1em Verdana;
+		position: absolute;
+		right: 5%;
+		top: 38%;
+		color: white;
+		text-shadow: 5px 5px 10px black;		
+}
+#changeSub {
+		float: left;
+		background-color: rgba(0,0,0,0.01);
+		border: 1px solid black;
+		box-shadow: 3px 4px 10px black;
+}
+#changeUserInfo {
+		font: bold 1em Verdana;
+		position: absolute;
+		right: 5%;
+		top: 36%;
+		color: white;
+		text-shadow: 5px 5px 10px black;		
+}
+#changeUserInfo ul {
+	list-style-type: none;
+}
+p.allow_email {
+		font: bold .7em Verdana;
+		position: absolute;
+		right: 4%;
+		top: 65%;
+		color: white;
+		text-shadow: 5px 5px 10px black;
+}
+#changeUI {
+		float: left;
+		background-color: rgba(0,0,0,0.01);
+		border: 1px solid black;
+		box-shadow: 3px 4px 10px black;
+}
+p.recovery {
+		font: bold .7em Verdana;
+		position: absolute;
+		top : 59%;
+		right: 5%;
+		color: white;
+		text-shadow: 5px 5px 10px black;		
+}
+p.recovery a {
+	color: #ffffff;
+	text-decoration: none;
+}
+p.recovery a:hover {
+	color: #ccccee;
+}
+#recoverUsername {
+		font: bold 1em Verdana;
+		position: absolute;
+		right: 5%;
+		top: 38%;
+		width: 17%;
+		color: white;
+		text-shadow: 5px 5px 10px black;		
+}
+#recoverUsername ul {
+	list-style-type: none;
+	font: bold .8em Verdana;
+	float: left;
+}
+#massMail {
+		font: bold 1em Verdana;
+		position: absolute;
+		right: 5%;
+		top: 33%;
+		color: white;
+		text-shadow: 5px 5px 10px black;
+}
+#massMail ul {
+	list-style-type: none;
+}
+textarea {
+	width: 400px;
+	height: 150px;
+	border: 1px solid #000000;
+}
+label.mass_mail {
+	
+	float: left;
+	width: 6em;
+	text-align: right;
+	margin-right: 1em;
+	margin-left: -3em;
+}
