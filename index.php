@@ -1,1 +1,5 @@
-<?php include 'public/index.php'; ?>
+
+<?php 
+include 'public/testing.php';
+include 'public/index.php'; 
+?>

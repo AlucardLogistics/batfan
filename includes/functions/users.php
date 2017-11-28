@@ -11,13 +11,13 @@
 		} else {
 
 			move_uploaded_file($file_temp, $file_path);
-			mysql_query("UPDATE `users` SET `profile` = '" . $file_path . "' WHERE `user_id` = " . (int)$user_id);
+			mysqli_query("UPDATE `users` SET `profile` = '" . $file_path . "' WHERE `user_id` = " . (int)$user_id);
 		}
 	}
 
 	function mail_users($subject, $body) {
-		$query = mysql_query("SELECT `email`, `first_name` FROM `users` WHERE `allow_email` = 1");
-		while(($row = mysql_fetch_assoc($query)) !== false) {
+		$query = mysqli_query("SELECT `email`, `first_name` FROM `users` WHERE `allow_email` = 1");
+		while(($row = mysqli_fetch_assoc($query)) !== false) {
 			email($row['email'], $subject, "Hello " . $row['first_name'] . ",\n" . $body . "\n-BatzCave");
 		}
 	}
@@ -25,8 +25,8 @@
 	function has_access($user_id, $type) {
 		$user_id = (int)$user_id;
 		$type    = (int)$type;
-		$query = mysql_query("SELECT COUNT(`user_id`) FROM `users` WHERE `user_id` = $user_id AND `type` = $type");
-		return (mysql_result($query, 0) == 1) ? true : false;
+		$query = mysqli_query("SELECT COUNT(`user_id`) FROM `users` WHERE `user_id` = $user_id AND `type` = $type");
+		return (mysqli_result($query, 0) == 1) ? true : false;
 	}
 
 	function recover($mode, $email) {
@@ -60,14 +60,14 @@
 	}
 
 	function activate($email, $email_code) {
-		$email        = mysql_real_escape_string($email);
-		$email_code   = mysql_real_escape_string($email_code);
+		$email        = mysqli_real_escape_string($email);
+		$email_code   = mysqli_real_escape_string($email_code);
 		
-		$query  = mysql_query("SELECT COUNT(`user_id`) FROM `users` WHERE `email` = '$email' AND `email_code` = '$email_code' AND `active` = 0");
-		$result = mysql_result($query, 0);
+		$query  = mysqli_query("SELECT COUNT(`user_id`) FROM `users` WHERE `email` = '$email' AND `email_code` = '$email_code' AND `active` = 0");
+		$result = mysqli_result($query, 0);
 		
 		if($result == 1) {
-			mysql_query("UPDATE `users` SET `active` = 1 WHERE `email` = '$email'");
+			mysqli_query("UPDATE `users` SET `active` = 1 WHERE `email` = '$email'");
 			return true;
 		} else {
 			return false;
@@ -77,7 +77,7 @@
 	function change_password($user_id, $password) {
 		$user_id = (int)$user_id;
 		$password = md5($password);
-		mysql_query("UPDATE `users` SET `password` = '$password', `password_recover` = 0 WHERE `user_id` = $user_id");
+		mysqli_query("UPDATE `users` SET `password` = '$password', `password_recover` = 0 WHERE `user_id` = $user_id");
 	}
 
 	function register_user($register_data) {
@@ -87,7 +87,7 @@
 		$data = '\'' . implode('\', \'', $register_data) . '\'';
 		$fields = '`' . implode('`, `', array_keys($register_data)) . '`';
 		
-		mysql_query("INSERT INTO `users` ($fields) VALUES ($data)");
+		mysqli_query("INSERT INTO `users` ($fields) VALUES ($data)");
 		
 		email($register_data['email'], 'Activate your account', "
 		Hello " . $register_data['first_name'] . ",
@@ -102,8 +102,8 @@
 	}
 
 	function user_count() {
-		$query = mysql_query("SELECT COUNT(`user_id`) FROM `users` WHERE `active` = 1");
-		return mysql_result($query, 0);
+		$query = mysqli_query("SELECT COUNT(`user_id`) FROM `users` WHERE `active` = 1");
+		return mysqli_result($query, 0);
 	}
 
 	function user_data($user_id) {
@@ -117,7 +117,7 @@
 			unset($func_get_args[0]);
 			
 			$fields = '`' . implode('`, `', $func_get_args) . '`';
-			$data = mysql_fetch_assoc(mysql_query("SELECT $fields FROM `users` WHERE `user_id` = $user_id"));
+			$data = mysqli_fetch_assoc(mysql_query("SELECT $fields FROM `users` WHERE `user_id` = $user_id"));
 			
 			return $data;
 		}
@@ -126,32 +126,42 @@
 	
 	function user_exists($username) {
 		$username = sanitize($username);
-		$query = mysql_query("SELECT COUNT(`user_id`) FROM `users` WHERE  `username` = '$username'");
-		return (mysql_result($query, 0) == 1) ? true : false;
+		global $con;
+		$query = mysqli_query($con, "SELECT COUNT(`user_id`) FROM `users` WHERE  `username` = '$username'");
+		if(mysqli_num_rows($query)>=1) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 	
 	function email_exists($email) {
 		$email = sanitize($email);
-		$query = mysql_query("SELECT COUNT(`user_id`) FROM `users` WHERE  `email` = '$email'");
-		return (mysql_result($query, 0) == 1) ? true : false;
+		global $con;
+		$query = mysqli_query($con, "SELECT COUNT(`user_id`) FROM `users` WHERE  `email` = '$email'");
+		if(mysqli_num_rows($query)>=1) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 	
 	function user_active($username) {
 		$username = sanitize($username);
-		$query = mysql_query("SELECT COUNT(`user_id`) FROM `users` WHERE  `username` = '$username' AND `active` = 1");
-		return (mysql_result($query, 0) == 1) ? true : false;
+		$query = mysqli_query("SELECT COUNT(`user_id`) FROM `users` WHERE  `username` = '$username' AND `active` = 1");
+		return (mysqli_result($query, 0) == 1) ? true : false;
 	}
 	
 	function user_id_from_username($username) {
 		$username = sanitize($username);
-		$query = mysql_query("SELECT `user_id` FROM `users` WHERE `username` = '$username'");
-		return (mysql_result($query, 0, 'user_id'));
+		$query = mysqli_query("SELECT `user_id` FROM `users` WHERE `username` = '$username'");
+		return (mysqli_result($query, 0, 'user_id'));
 	}
 	
 	function user_id_from_email($email) {
 		$email = sanitize($email);
-		$query = mysql_query("SELECT `user_id` FROM `users` WHERE `email` = '$email'");
-		return (mysql_result($query, 0, 'user_id'));
+		$query = mysqli_query("SELECT `user_id` FROM `users` WHERE `email` = '$email'");
+		return (mysqli_result($query, 0, 'user_id'));
 	}
 	
 	function login($username, $password) {
@@ -159,8 +169,8 @@
 		
 		$username = sanitize($username);
 		$password = md5($password);
-		$query = mysql_query("SELECT COUNT(`user_id`) FROM `users` WHERE `username` = '$username' AND `password` = '$password'");
-		return (mysql_result($query, 0) == 1) ? $user_id : false;
+		$query = mysqli_query("SELECT COUNT(`user_id`) FROM `users` WHERE `username` = '$username' AND `password` = '$password'");
+		return (mysqli_result($query, 0) == 1) ? $user_id : false;
 	}
 	
 	function logged_in() {

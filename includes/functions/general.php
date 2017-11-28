@@ -26,11 +26,12 @@
 	}
 
 	function array_sanitize($item) {
-		$item = htmlentities(strip_tags(mysql_real_escape_string($item)));
+		$item = htmlentities(strip_tags(mysqli_real_escape_string($item)));
 	}
 	
 	function sanitize($data) {
-		return htmlentities(strip_tags(mysql_real_escape_string($data)));
+		$con = mysqli_connect('localhost', 'root', '3666');
+		return htmlentities(strip_tags(mysqli_real_escape_string($con, $data)));
 	}
 	
 	function output_errors($errors) {
